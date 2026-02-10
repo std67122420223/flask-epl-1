@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from epl.extensions import db, migrate
 from epl.core.routes import core_bp
@@ -7,8 +8,14 @@ from epl.players.routes import player_bp
 
 def create_app():
   app = Flask(__name__)
-  app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/epl_s02_db'
+  # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://sql12816709:36I6sMQTUz@sql12.freesqldatabase.com:3306/sql12816709'
+  # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/epl_s02_db'
   # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/epl_s02_db'
+  # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://epl_postgresql_db_user:olbj7CSlns1K6fE7EOEfppm3pyqueRK2@dpg-d65kn594tr6s73fsn1fg-a.oregon-postgres.render.com/epl_postgresql_db'
+  app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+  
+  # postgresql://epl_postgresql_db_user:olbj7CSlns1K6fE7EOEfppm3pyqueRK2@dpg-d65kn594tr6s73fsn1fg-a.oregon-postgres.render.com/epl_postgresql_db
   app.secret_key = b'hguyfdrerdfguhiophgytrt'
   
   db.init_app(app)
