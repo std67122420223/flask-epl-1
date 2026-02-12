@@ -12,4 +12,5 @@ dependencies = [
     "mysqlclient>=2.2.7",
     "psycopg2>=2.9.11",
     "psycopg2-binary>=2.9.11",
+    "pymysql>=1.1.2",
 ]
